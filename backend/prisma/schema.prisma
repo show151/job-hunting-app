@@ -1,0 +1,139 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ---------- Enum ----------
+
+enum SelectionPhaseType {
+  CASUAL_INTERVIEW // カジュアル面談(合否はないが実質選考に近いためフローに含める)
+  ENTRY            // エントリー
+  DOCUMENT         // 書類選考(ES)
+  FIRST_INTERVIEW  // 一次面接
+  SECOND_INTERVIEW // 二次面接
+  FINAL_INTERVIEW  // 最終面接
+  OFFER            // 内定
+  REJECTED         // 不採用
+  WITHDRAWN        // 辞退
+}
+
+enum PhaseStatus {
+  NOT_STARTED  // 未着手
+  IN_PROGRESS  // 進行中
+  PASSED       // 合格
+  FAILED       // 不合格
+  WITHDRAWN    // 辞退
+}
+
+enum TaskType {
+  DEADLINE            // 提出締切
+  INTERVIEW           // 面接
+  EXPLANATION_SESSION // 説明会(選考フローとは別に、企業理解のために参加するイベント)
+  OTHER               // その他
+}
+
+enum ApplicationRoute {
+  DIRECT      // 企業サイトから直接
+  AGENCY      // 就活サイト経由
+  REFERRAL    // リファラル・紹介
+  CAMPUS      // 大学経由
+  OTHER
+}
+
+// ---------- Model ----------
+
+model User {
+  id           String     @id @default(uuid())
+  email        String     @unique
+  passwordHash String
+  name         String
+  companies    Company[]
+  documents    Document[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model Company {
+  id             String            @id @default(uuid())
+  user           User              @relation(fields: [userId], references: [id])
+  userId         String
+  name           String
+  industry       String?
+  route          ApplicationRoute  @default(OTHER)
+  url            String?
+  memo           String?
+  phases         SelectionPhase[]
+  tasks          Task[]
+  documents      Document[]
+  interviewNotes InterviewNote[]
+  deletedAt      DateTime?
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+
+  @@index([userId])
+}
+
+// 選考フェーズの履歴。フェーズが進むたびに新規レコードを作成する
+model SelectionPhase {
+  id             String              @id @default(uuid())
+  company        Company             @relation(fields: [companyId], references: [id])
+  companyId      String
+  phase          SelectionPhaseType
+  status         PhaseStatus         @default(NOT_STARTED)
+  changedAt      DateTime            @default(now())
+  memo           String?
+  tasks          Task[]
+  interviewNotes InterviewNote[]
+
+  @@index([companyId])
+}
+
+model Task {
+  id         String          @id @default(uuid())
+  company    Company         @relation(fields: [companyId], references: [id])
+  companyId  String
+  phase      SelectionPhase? @relation(fields: [phaseId], references: [id])
+  phaseId    String?
+  title      String
+  type       TaskType
+  dueAt      DateTime
+  isDone     Boolean         @default(false)
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+
+  @@index([companyId])
+  @@index([dueAt])
+}
+
+model Document {
+  id         String   @id @default(uuid())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  company    Company? @relation(fields: [companyId], references: [id])
+  companyId  String?
+  title      String
+  body       String
+  isTemplate Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model InterviewNote {
+  id            String          @id @default(uuid())
+  company       Company         @relation(fields: [companyId], references: [id])
+  companyId     String
+  phase         SelectionPhase? @relation(fields: [phaseId], references: [id])
+  phaseId       String?
+  question      String?
+  answer        String?
+  impression    String?
+  interviewedAt DateTime
+  createdAt     DateTime        @default(now())
+
+  @@index([companyId])
+}

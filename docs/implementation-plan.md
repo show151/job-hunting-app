@@ -40,21 +40,20 @@
 - [x] `GET /api/auth/me` 実装
 - [x] zodでリクエストバリデーションを実装
 - [x] curl/Postman等で手動動作確認
-- [ ] PR作成 → セルフレビュー → `main`にマージ
-
----
+- [x] PR作成 → セルフレビュー → `main`にマ
+-
 
 ## Phase 2: 応募先企業(Company)CRUD
 対応ブランチ例: `feature/company-crud`
 
-- [ ] Issue: 「Company CRUD APIの実装」を作成
-- [ ] `GET /api/companies`(検索・絞り込みクエリ対応)
-- [ ] `POST /api/companies`
-- [ ] `GET /api/companies/:id`
-- [ ] `PUT /api/companies/:id`
-- [ ] `DELETE /api/companies/:id`(論理削除、`deletedAt`設定)
-- [ ] zodバリデーション実装
-- [ ] 認証ミドルウェアを適用し、他ユーザーのデータにアクセスできないことを確認
+- [x] Issue: 「Company CRUD APIの実装」を作成
+- [x] `GET /api/companies`(検索・絞り込みクエリ対応)
+- [x] `POST /api/companies`
+- [x] `GET /api/companies/:id`
+- [x] `PUT /api/companies/:id`
+- [x] `DELETE /api/companies/:id`(論理削除、`deletedAt`設定)
+- [x] zodバリデーション実装
+- [x] 認証ミドルウェアを適用し、他ユーザーのデータにアクセスできないことを確認
 - [ ] PR作成 → セルフレビュー → `main`にマージ
 
 ---

@@ -4,11 +4,15 @@ import "dotenv/config";
 
 import authRouter from "./routes/auth.js";
 
+import companiesRouter from "./routes/companies.js";
+
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRouter);
+
+app.use("/api/companies", companiesRouter);
 
 app.get("/api/health", (_req, res) => {
     res.json({ data: { status: "ok" }, error: null });

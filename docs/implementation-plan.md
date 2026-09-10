@@ -40,8 +40,9 @@
 - [x] `GET /api/auth/me` 実装
 - [x] zodでリクエストバリデーションを実装
 - [x] curl/Postman等で手動動作確認
-- [x] PR作成 → セルフレビュー → `main`にマ
--
+- [ ] PR作成 → セルフレビュー → `main`にマージ
+
+---
 
 ## Phase 2: 応募先企業(Company)CRUD
 対応ブランチ例: `feature/company-crud`

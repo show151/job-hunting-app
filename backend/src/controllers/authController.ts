@@ -20,7 +20,7 @@ export async function register(req: Request, res: Response) {
     }
 
     const passwordHash = await hashPassword(password);  // パスワードをハッシュ化
-    
+
     // ユーザーをデータベースに作成
     const user = await prisma.user.create({
         data: { email, passwordHash, name },

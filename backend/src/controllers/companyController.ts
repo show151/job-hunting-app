@@ -26,7 +26,7 @@ export async function listCompanies(req: AuthedRequest, res: Response) {
             ...(industry ? { industry } : {}),  // 業界でフィルタリング
         },
         include: {
-            phases: { orderBy: { changedAt: "desc" }, take: 1 }, 
+            phases: { orderBy: { changedAt: "desc" }, take: 1 },
         },
         orderBy: { createdAt: "desc" },
     });
@@ -119,7 +119,7 @@ export async function updateCompany(req: AuthedRequest, res: Response) {
     if (!parsed.success) {
         return res.status(400).json({ data: null, error: parsed.error.issues[0]?.message });
     }
-    
+
     const userId = req.userId;  // 認証済みユーザーのIDを取得
     if (!userId) {
         return res.status(401).json({

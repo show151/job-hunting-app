@@ -2,7 +2,6 @@ import type { Response } from "express";
 import { prisma } from "../lib/prisma.js";
 import { createCompanySchema, updateCompanySchema } from "../schemas/company.js";
 import type { AuthedRequest } from "../middlewares/requireAuth.js";
-import type { Company } from "@prisma/client";
 
 // GET /api/companies?keyword=&industry=&phase=
 export async function listCompanies(req: AuthedRequest, res: Response) {

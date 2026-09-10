@@ -23,6 +23,7 @@ export async function listPhases(req: AuthedRequest, res: Response) {
         });
     }
 
+    // 応募先の存在確認
     const company = await prisma.company.findFirst({
         where: { id, userId, deletedAt: null },
     });    
@@ -59,6 +60,7 @@ export async function createPhase(req: AuthedRequest, res: Response) {
         });
     }
 
+    // 応募先の存在確認
     const company = await prisma.company.findFirst({
         where: { id, userId, deletedAt: null },
     });
@@ -107,14 +109,17 @@ export async function updatePhase(req: AuthedRequest, res: Response) {
 
     const data: Record<string, unknown> = {};  // 更新するデータを格納するオブジェクト
 
+    // ステータス更新
     if (parsed.data.status !== undefined) {
         data.status = parsed.data.status;
     }
 
+    // メモ更新
     if (parsed.data.memo !== undefined) {
         data.memo = parsed.data.memo;
     }
 
+    // 所持者の応募先に紐づく選考フェーズが存在するか確認
     const phase = await prisma.selectionPhase.findFirst({
         where: { id, company: { userId, deletedAt: null } },
     });
@@ -151,6 +156,7 @@ export async function deletePhase(req: AuthedRequest, res: Response) {
         });
     }
 
+    // 所持者の応募先に紐づく選考フェーズが存在するか確認
     const phase = await prisma.selectionPhase.findFirst({
         where: { id, company: { userId, deletedAt: null } },
     });
@@ -158,6 +164,7 @@ export async function deletePhase(req: AuthedRequest, res: Response) {
         return res.status(404).json({ data: null, error: "選考フェーズが見つかりません" });
     }
 
+    // 選考フェーズを削除
     await prisma.selectionPhase.delete({ where: { id } });
     res.status(204).send();
 }

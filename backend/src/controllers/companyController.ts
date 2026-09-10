@@ -2,6 +2,7 @@ import type { Response } from "express";
 import { prisma } from "../lib/prisma.js";
 import { createCompanySchema, updateCompanySchema } from "../schemas/company.js";
 import type { AuthedRequest } from "../middlewares/requireAuth.js";
+import type { Company } from "@prisma/client";
 
 // GET /api/companies?keyword=&industry=&phase=
 export async function listCompanies(req: AuthedRequest, res: Response) {
@@ -32,13 +33,13 @@ export async function listCompanies(req: AuthedRequest, res: Response) {
     });
 
     // currentPhaseをアプリ側で算出する（12.10の方針）
-    let result = companies.map((c) => ({
+    let result = companies.map((c: typeof companies[number]) => ({
         ...c,
         currentPhase: c.phases[0] ?? null,
     }));
 
     if (phase) {
-        result = result.filter((c) => c.currentPhase?.phase === phase);
+        result = result.filter((c: typeof result[number]) => c.currentPhase?.phase === phase);
     }
 
     res.json({ data: result, error: null });

@@ -32,13 +32,13 @@ export async function listCompanies(req: AuthedRequest, res: Response) {
     });
 
     // currentPhaseをアプリ側で算出する（12.10の方針）
-    let result = companies.map((c: typeof companies[number]) => ({
+    let result = companies.map((c) => ({
         ...c,
         currentPhase: c.phases[0] ?? null,
     }));
 
     if (phase) {
-        result = result.filter((c: typeof result[number]) => c.currentPhase?.phase === phase);
+        result = result.filter((c) => c.currentPhase?.phase === phase);
     }
 
     res.json({ data: result, error: null });

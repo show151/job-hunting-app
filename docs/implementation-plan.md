@@ -16,30 +16,30 @@
 ## Phase 0: プロジェクト初期セットアップ
 対応ブランチ例: `chore/project-setup`
 
-- [ ] GitHubリポジトリ作成、`main`ブランチのBranch protection設定(PR必須・直接push禁止)
-- [ ] `.gitignore`配置(`node_modules/`, `.env`, `dist/`)
-- [ ] `docker-compose.yml`配置、PostgreSQL起動確認
-- [ ] `backend/`: npm init、TypeScript設定、Express雛形作成
-- [ ] `frontend/`: Vite + React + TypeScriptプロジェクト作成
-- [ ] Prisma初期化、`schema.prisma`に要件定義書11章のスキーマを反映
-- [ ] `npx prisma migrate dev --name init` 実行、DB反映確認
-- [ ] `.github/ISSUE_TEMPLATE/`、`.github/PULL_REQUEST_TEMPLATE.md`作成
-- [ ] `.github/workflows/ci.yml`作成(型チェック・Lintの自動実行)
-- [ ] `README.md`初版作成(プロジェクト概要・セットアップ手順)
+- [x] GitHubリポジトリ作成、`main`ブランチのBranch protection設定(PR必須・直接push禁止)
+- [x] `.gitignore`配置(`node_modules/`, `.env`, `dist/`)
+- [x] `docker-compose.yml`配置、PostgreSQL起動確認
+- [x] `backend/`: npm init、TypeScript設定、Express雛形作成
+- [x] `frontend/`: Vite + React + TypeScriptプロジェクト作成
+- [x] Prisma初期化、`schema.prisma`に要件定義書11章のスキーマを反映
+- [x] `npx prisma migrate dev --name init` 実行、DB反映確認
+- [x] `.github/ISSUE_TEMPLATE/`、`.github/PULL_REQUEST_TEMPLATE.md`作成
+- [x] `.github/workflows/ci.yml`作成(型チェック・Lintの自動実行)
+- [x] `README.md`初版作成(プロジェクト概要・セットアップ手順)
 
 ---
 
 ## Phase 1: 認証機能
 対応ブランチ例: `feature/auth-api`
 
-- [ ] Issue: 「ユーザー登録・ログインAPIの実装」を作成
-- [ ] bcryptによるパスワードハッシュ化処理を実装
-- [ ] JWT発行処理、および検証ミドルウェアを実装
-- [ ] `POST /api/auth/register` 実装
-- [ ] `POST /api/auth/login` 実装
-- [ ] `GET /api/auth/me` 実装
-- [ ] zodでリクエストバリデーションを実装
-- [ ] curl/Postman等で手動動作確認
+- [x] Issue: 「ユーザー登録・ログインAPIの実装」を作成
+- [x] bcryptによるパスワードハッシュ化処理を実装
+- [x] JWT発行処理、および検証ミドルウェアを実装
+- [x] `POST /api/auth/register` 実装
+- [x] `POST /api/auth/login` 実装
+- [x] `GET /api/auth/me` 実装
+- [x] zodでリクエストバリデーションを実装
+- [x] curl/Postman等で手動動作確認
 - [ ] PR作成 → セルフレビュー → `main`にマージ
 
 ---
@@ -47,14 +47,14 @@
 ## Phase 2: 応募先企業(Company)CRUD
 対応ブランチ例: `feature/company-crud`
 
-- [ ] Issue: 「Company CRUD APIの実装」を作成
-- [ ] `GET /api/companies`(検索・絞り込みクエリ対応)
-- [ ] `POST /api/companies`
-- [ ] `GET /api/companies/:id`
-- [ ] `PUT /api/companies/:id`
-- [ ] `DELETE /api/companies/:id`(論理削除、`deletedAt`設定)
-- [ ] zodバリデーション実装
-- [ ] 認証ミドルウェアを適用し、他ユーザーのデータにアクセスできないことを確認
+- [x] Issue: 「Company CRUD APIの実装」を作成
+- [x] `GET /api/companies`(検索・絞り込みクエリ対応)
+- [x] `POST /api/companies`
+- [x] `GET /api/companies/:id`
+- [x] `PUT /api/companies/:id`
+- [x] `DELETE /api/companies/:id`(論理削除、`deletedAt`設定)
+- [x] zodバリデーション実装
+- [x] 認証ミドルウェアを適用し、他ユーザーのデータにアクセスできないことを確認
 - [ ] PR作成 → セルフレビュー → `main`にマージ
 
 ---

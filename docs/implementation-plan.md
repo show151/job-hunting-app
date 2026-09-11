@@ -9,7 +9,8 @@
 ## 0. 使い方
 - フェーズは基本的に上から順番に進める(依存関係があるため)
 - 各フェーズの完了時に、末尾の「進捗管理表」のステータスを更新する
-- 1タスク(またはタスクのまとまり)ごとに1 Issue → 1ブランチ → 1PRを基本単位とする
+- 1つのIssueにつき必ず1つのブランチ・1つのPRを作成する(複数Issueを1ブランチにまとめない)
+- フェーズ内に複数Issueがある場合は「Part A / Part B …」として分割し、依存関係がある場合は前のPartのマージ後に次のブランチを作成する
 
 ---
 
@@ -25,6 +26,10 @@
 - [x] `npx prisma migrate dev --name init` 実行、DB反映確認
 - [x] `.github/ISSUE_TEMPLATE/`、`.github/PULL_REQUEST_TEMPLATE.md`作成
 - [x] `.github/workflows/ci.yml`作成(型チェック・Lintの自動実行)
+- [x] backendにESLintを導入し、npm run lintを追加
+- [x] backendのtsconfig.jsonでoutDir/rootDirを確認し、npm run buildを通す
+- [x] frontendのnpm run lint・npm run buildを確認
+- [x] ci.ymlをlint・型チェック・buildの3ステップに更新
 - [x] `README.md`初版作成(プロジェクト概要・セットアップ手順)
 
 ---
@@ -55,34 +60,46 @@
 - [x] `DELETE /api/companies/:id`(論理削除、`deletedAt`設定)
 - [x] zodバリデーション実装
 - [x] 認証ミドルウェアを適用し、他ユーザーのデータにアクセスできないことを確認
-- [ ] PR作成 → セルフレビュー → `main`にマージ
+- [x] PR作成 → セルフレビュー → `main`にマージ
 
 ---
 
 ## Phase 3: 選考フェーズ・タスク(説明会・カジュアル面談を含む)
-対応ブランチ例: `feature/phase-task-api`
+### Part A: SelectionPhase API
+対応ブランチ: `feature/selection-phase-api`
 
-- [ ] Issue: 「SelectionPhase APIの実装」を作成
+- [x] Issue: 「SelectionPhase APIの実装」を作成
+- [ ] GET/POST /api/companies/:companyId/phases
+- [ ] PUT/DELETE /api/phases/:id
+- [ ] currentPhase算出ロジックを実装(要件定義書12.10の方針: アプリ側で都度算出)
+- [ ] PR作成 → セルフレビュー → mainにマージ
+
+### Part B: Task API
+対応ブランチ: `feature/task-api`(Part Aマージ後に着手)
+
 - [ ] Issue: 「Task APIの実装」を作成
-- [ ] `GET/POST /api/companies/:companyId/phases`
-- [ ] `PUT/DELETE /api/phases/:id`
-- [ ] `currentPhase`算出ロジックを実装(要件定義書12.10の方針: アプリ側で都度算出)
-- [ ] `GET /api/tasks`(`?upcoming=true`、`?companyId=`等の絞り込み対応)
-- [ ] `POST /api/companies/:companyId/tasks`(締切/面接/説明会/その他に対応)
-- [ ] `PUT/DELETE /api/tasks/:id`
-- [ ] PR作成 → セルフレビュー → `main`にマージ
+- [ ] GET /api/tasks(?upcoming=true、?companyId=等の絞り込み対応)
+- [ ] POST /api/companies/:companyId/tasks(締切/面接/説明会/その他に対応)
+- [ ] PUT/DELETE /api/tasks/:id
+- [ ] PR作成 → セルフレビュー → mainにマージ
 
 ---
 
 ## Phase 4: 書類・面接メモ
-対応ブランチ例: `feature/document-note-api`
+### Part A: Document API
+対応ブランチ: `feature/document-api`
 
 - [ ] Issue: 「Document APIの実装」を作成
+- [ ] Document CRUD(isTemplate対応)
+- [ ] POST /api/documents/:id/duplicate(テンプレート複製)
+- [ ] PR作成 → セルフレビュー → mainにマージ
+
+### Part B: InterviewNote API
+対応ブランチ: `feature/interview-note-api`(Part Aマージ後に着手)
+
 - [ ] Issue: 「InterviewNote APIの実装」を作成
-- [ ] Document CRUD(`isTemplate`対応)
-- [ ] `POST /api/documents/:id/duplicate`(テンプレート複製)
 - [ ] InterviewNote CRUD
-- [ ] PR作成 → セルフレビュー → `main`にマージ
+- [ ] PR作成 → セルフレビュー → mainにマージ
 
 ---
 
@@ -96,16 +113,41 @@
 ---
 
 ## Phase 6: フロントエンド実装
-対応ブランチ例: `feature/login-ui`, `feature/dashboard-ui`, `feature/company-list-ui`, `feature/company-detail-ui`
+### Part A: APIクライアント・認証状態管理
+対応ブランチ: `feature/api-client-auth-state`
 
 - [ ] Issue: 「APIクライアント・認証状態管理の実装」を作成
 - [ ] APIクライアント(fetch/axiosラッパー)実装
 - [ ] JWTの保持・認証状態管理を実装
-- [ ] Issue: 「ログイン/新規登録画面の実装」を作成 → 要件定義書14.5のデザインに準拠して実装
-- [ ] Issue: 「ダッシュボード画面の実装」を作成 → 14.2のデザインに準拠して実装
-- [ ] Issue: 「応募先一覧・カンバン画面の実装」を作成 → 14.3の表示件数制御(5件+展開)を含めて実装
-- [ ] Issue: 「応募先詳細画面の実装」を作成 → 14.4のデザインに準拠して実装
-- [ ] 各画面ごとにPR作成 → セルフレビュー → `main`にマージ
+- [ ] PR作成 → セルフレビュー → mainにマージ
+
+### Part B: ログイン/新規登録画面
+対応ブランチ: `feature/login-ui`(Part Aマージ後に着手)
+
+- [ ] Issue: 「ログイン/新規登録画面の実装」を作成
+- [ ] 要件定義書14.5のデザインに準拠して実装
+- [ ] PR作成 → セルフレビュー → mainにマージ
+
+### Part C: ダッシュボード画面
+対応ブランチ: `feature/dashboard-ui`(Part Aマージ後に着手)
+
+- [ ] Issue: 「ダッシュボード画面の実装」を作成
+- [ ] 要件定義書14.2のデザインに準拠して実装
+- [ ] PR作成 → セルフレビュー → mainにマージ
+
+### Part D: 応募先一覧・カンバン画面
+対応ブランチ: `feature/company-list-ui`(Part Aマージ後に着手)
+
+- [ ] Issue: 「応募先一覧・カンバン画面の実装」を作成
+- [ ] 要件定義書14.3の表示件数制御(5件+展開)を含めて実装
+- [ ] PR作成 → セルフレビュー → mainにマージ
+
+### Part E: 応募先詳細画面
+対応ブランチ: `feature/company-detail-ui`(Part Aマージ後に着手)
+
+- [ ] Issue: 「応募先詳細画面の実装」を作成
+- [ ] 要件定義書14.4のデザインに準拠して実装
+- [ ] PR作成 → セルフレビュー → mainにマージ
 
 ---
 
@@ -122,9 +164,9 @@
 
 | Phase | 内容 | ステータス |
 |---|---|---|
-| 0 | プロジェクト初期セットアップ | 未着手 |
-| 1 | 認証機能 | 未着手 |
-| 2 | Company CRUD | 未着手 |
+| 0 | プロジェクト初期セットアップ | 完了 |
+| 1 | 認証機能 | 完了 |
+| 2 | Company CRUD | 完了 |
 | 3 | 選考フェーズ・タスク | 未着手 |
 | 4 | 書類・面接メモ | 未着手 |
 | 5 | ダッシュボードAPI | 未着手 |

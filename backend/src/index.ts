@@ -8,6 +8,8 @@ import companiesRouter from "./routes/companies.js";
 
 import phasesRouter from "./routes/phases.js";
 
+import tasksRouter from "./routes/tasks.js";
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -17,6 +19,8 @@ app.use("/api/auth", authRouter);
 app.use("/api/companies", companiesRouter);
 
 app.use("/api/phases", phasesRouter);
+
+app.use("/api/tasks", tasksRouter);
 
 app.get("/api/health", (_req, res) => {
     res.json({ data: { status: "ok" }, error: null });

@@ -10,6 +10,8 @@ import {
 
 import { listPhases, createPhase } from "../controllers/phaseController.js";
 
+import { createTask } from "../controllers/taskController.js";
+
 const router = Router();
 
 router.use(requireAuth);  // このルーター配下は全て認証必須
@@ -22,5 +24,7 @@ router.delete("/:id", deleteCompany);
 
 router.get("/:companyId/phases", listPhases);
 router.post("/:companyId/phases", createPhase);
+
+router.post("/:companyId/tasks", createTask);
 
 export default router;

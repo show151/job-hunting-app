@@ -69,10 +69,10 @@
 対応ブランチ: `feature/selection-phase-api`
 
 - [x] Issue: 「SelectionPhase APIの実装」を作成
-- [ ] GET/POST /api/companies/:companyId/phases
-- [ ] PUT/DELETE /api/phases/:id
-- [ ] currentPhase算出ロジックを実装(要件定義書12.10の方針: アプリ側で都度算出)
-- [ ] PR作成 → セルフレビュー → mainにマージ
+- [x] GET/POST /api/companies/:companyId/phases
+- [x] PUT/DELETE /api/phases/:id
+- [x] currentPhase算出ロジックを実装(要件定義書12.10の方針: アプリ側で都度算出)
+- [x] PR作成 → セルフレビュー → mainにマージ
 
 ### Part B: Task API
 対応ブランチ: `feature/task-api`(Part Aマージ後に着手)
@@ -89,7 +89,7 @@
 ### Part A: Document API
 対応ブランチ: `feature/document-api`
 
-- [ ] Issue: 「Document APIの実装」を作成
+- [x] Issue: 「Document APIの実装」を作成
 - [ ] Document CRUD(isTemplate対応)
 - [ ] POST /api/documents/:id/duplicate(テンプレート複製)
 - [ ] PR作成 → セルフレビュー → mainにマージ
@@ -97,7 +97,7 @@
 ### Part B: InterviewNote API
 対応ブランチ: `feature/interview-note-api`(Part Aマージ後に着手)
 
-- [ ] Issue: 「InterviewNote APIの実装」を作成
+- [x] Issue: 「InterviewNote APIの実装」を作成
 - [ ] InterviewNote CRUD
 - [ ] PR作成 → セルフレビュー → mainにマージ
 
@@ -106,7 +106,7 @@
 ## Phase 5: ダッシュボードAPI
 対応ブランチ例: `feature/dashboard-api`
 
-- [ ] Issue: 「ダッシュボード集約APIの実装」を作成
+- [x] Issue: 「ダッシュボード集約APIの実装」を作成
 - [ ] `GET /api/dashboard`(応募中/選考中/内定/不採用の件数、直近タスク、フェーズ別件数を集計)
 - [ ] PR作成 → セルフレビュー → `main`にマージ
 
@@ -116,7 +116,7 @@
 ### Part A: APIクライアント・認証状態管理
 対応ブランチ: `feature/api-client-auth-state`
 
-- [ ] Issue: 「APIクライアント・認証状態管理の実装」を作成
+- [x] Issue: 「APIクライアント・認証状態管理の実装」を作成
 - [ ] APIクライアント(fetch/axiosラッパー)実装
 - [ ] JWTの保持・認証状態管理を実装
 - [ ] PR作成 → セルフレビュー → mainにマージ
@@ -124,28 +124,28 @@
 ### Part B: ログイン/新規登録画面
 対応ブランチ: `feature/login-ui`(Part Aマージ後に着手)
 
-- [ ] Issue: 「ログイン/新規登録画面の実装」を作成
+- [x] Issue: 「ログイン/新規登録画面の実装」を作成
 - [ ] 要件定義書14.5のデザインに準拠して実装
 - [ ] PR作成 → セルフレビュー → mainにマージ
 
 ### Part C: ダッシュボード画面
 対応ブランチ: `feature/dashboard-ui`(Part Aマージ後に着手)
 
-- [ ] Issue: 「ダッシュボード画面の実装」を作成
+- [x] Issue: 「ダッシュボード画面の実装」を作成
 - [ ] 要件定義書14.2のデザインに準拠して実装
 - [ ] PR作成 → セルフレビュー → mainにマージ
 
 ### Part D: 応募先一覧・カンバン画面
 対応ブランチ: `feature/company-list-ui`(Part Aマージ後に着手)
 
-- [ ] Issue: 「応募先一覧・カンバン画面の実装」を作成
+- [x] Issue: 「応募先一覧・カンバン画面の実装」を作成
 - [ ] 要件定義書14.3の表示件数制御(5件+展開)を含めて実装
 - [ ] PR作成 → セルフレビュー → mainにマージ
 
 ### Part E: 応募先詳細画面
 対応ブランチ: `feature/company-detail-ui`(Part Aマージ後に着手)
 
-- [ ] Issue: 「応募先詳細画面の実装」を作成
+- [x] Issue: 「応募先詳細画面の実装」を作成
 - [ ] 要件定義書14.4のデザインに準拠して実装
 - [ ] PR作成 → セルフレビュー → mainにマージ
 
@@ -167,7 +167,7 @@
 | 0 | プロジェクト初期セットアップ | 完了 |
 | 1 | 認証機能 | 完了 |
 | 2 | Company CRUD | 完了 |
-| 3 | 選考フェーズ・タスク | 未着手 |
+| 3 | 選考フェーズ・タスク | 完了 |
 | 4 | 書類・面接メモ | 未着手 |
 | 5 | ダッシュボードAPI | 未着手 |
 | 6 | フロントエンド実装 | 未着手 |
